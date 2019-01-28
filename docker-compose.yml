@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  ganache:
+    image: trufflesuite/ganache-cli
+    command: "-i 123 -p 8545 --account ${ACCOUNT1_PK},${ACCOUNT1_WEI} --account ${ACCOUNT2_PK},${ACCOUNT2_WEI} --account ${ACCOUNT3_PK},${ACCOUNT3_WEI}"
+    ports:
+      - "8545:8545"

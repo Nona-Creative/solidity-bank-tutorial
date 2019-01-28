@@ -1,0 +1,10 @@
+{
+  "init": "initialize project",
+  "services:up": "start all required services",
+  "services:buildup": "rebuild and start all required services",
+  "services:down:ganache": "stop and remove ganache container",
+  "test:contracts": "run all contract tests",
+  "test:contracts:watch": "run all contract tests, in watch mode",
+  "lint:contracts": "run solidity linter on all contracts",
+  "lint:contracts:watch": "run solidity linter on all contracts, in watch mode"
+}
