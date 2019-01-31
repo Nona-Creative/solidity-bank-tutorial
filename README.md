@@ -32,11 +32,15 @@ and so that you can checkout the ``solutions`` branch at any point.
     npm run test:contracts:watch
     ```
 
-6. Follow the tutorial
+6. Follow the [tutorial](TUTORIAL.md)
 
 ### Solutions
 
-To see solutions checkout the ``solutions`` branch.
+To see the solutions for the tutorial checkout the ``solutions`` branch.
+
+To see the solutions for ``challenge 1`` checkout the ``solutions_challenge1`` branch.
+
+To see the solutions for ``challenge 2`` checkout the ``solutions_challenge2`` branch.
 
 ### More
 
