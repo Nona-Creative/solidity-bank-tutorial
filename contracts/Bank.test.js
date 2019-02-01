@@ -169,7 +169,6 @@ describe('Bank', () => {
       // INSERT TEST HERE
 
       // ... should have emitted a Transfer event with expected values
-      assert.hasAllKeys(tx.events, ['Transfer'])
       // INSERT TEST HERE
     }))
 
