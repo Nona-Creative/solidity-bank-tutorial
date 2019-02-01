@@ -3,6 +3,7 @@ const { ContractUtils } = require('ethereum-utils')
 const chaiAsPromised = require('chai-as-promised')
 const Web3 = require('web3')
 const BigNumber = require('bignumber.js')
+const Bluebird = require('bluebird')
 
 const { Contract } = require('../src/common/utils/ethereum-test-utils')
 
@@ -10,6 +11,14 @@ chai.use(chaiAsPromised)
 
 const { assert } = chai
 const { create: contract } = Contract(['Bank'])
+
+const pollForValue = f => f()
+  .then(x => x !== null
+    ? x
+    : Bluebird
+      .resolve()
+      .delay(200)
+      .then(() => pollForValue(f)))
 
 describe('Bank', () => {
   describe('access', () => {
@@ -105,6 +114,27 @@ describe('Bank', () => {
         Error,
         /Please provide the correct account creation fee/,
       )
+    }))
+
+    it.only('should create an activated account for sender', contract('Bank', async ({ web3, accounts, instance }) => {
+      // given
+      // ... no active account exists for address 0
+      // when
+      // ... we create a new account as address 0
+      // ... providing the correct account creation fee
+      const createAccountFee = await ContractUtils.call(
+        instance.methods.createAccountFee(),
+        { from: accounts[2] },
+      )
+      const txHash = await ContractUtils.send(
+        instance.methods.createAccount(),
+        { from: accounts[0], value: Web3.utils.toHex(createAccountFee) },
+        false,
+      )
+
+      const tx = await pollForValue(() => web3.eth.getTransactionReceipt(txHash))
+
+      assert.match(tx.transactionHash, /0x[a-z0-9]{64}/)
     }))
   })
 
