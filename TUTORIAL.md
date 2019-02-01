@@ -438,6 +438,8 @@ function createAccount() external payable {
 
 And that's that.
 
+To see the solutions for the tutorial so far checkout the ``solutions`` branch in the suggested starting point repo.
+
 
 Conclusion
 ---
@@ -469,6 +471,23 @@ Use the following process:
 
 and repeat ...
 
+### Help
+
+if you are struggling or just want some guidance / hints, checkout one of the following branches and work from there:
+
+ - ``solutions_challenge1`` full solution (contract & tests)
+ - ``solutions_challenge1_test_names`` only contains test names (to give you an idea of what behaviours you should be covering)
+ - ``solutions_challenge1_test_names_and_gwt`` contains both test names and given/when/then comments (to give you an idea of how to go about testing each behaviour)
+ - ``solutions_challenge1_contract`` contains only solved contract, but no tests
+
+To see the solutions for the tutorial so far checkout the ``solutions`` branch in the suggested starting point repo.
+
+### Bonus:
+
+For a little extra test coverage:
+
+When testing successful deposit, also assert that the deposit cost the sender's Ethereum address the expected amount after you account for fees.
+And do the same for successful withdraw, assert that the sender's Ethereum address was credited as expected after you account for fees.
 
 Challenge 2
 ---
