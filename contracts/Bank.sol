@@ -50,7 +50,7 @@ contract Bank {
 
   // NOTE: All the fees of a transaction (including any internal transactions it triggers)
   // are paid by the transaction sender. Contracts cannot pay gas fees.
-  function withdraw(uint256 amount) external payable {
+  function withdraw(uint256 amount) external {
     require(accounts[msg.sender], "Please create an account first");
     require(balances[msg.sender] >= amount, "Insufficient funds");
     msg.sender.transfer(amount);

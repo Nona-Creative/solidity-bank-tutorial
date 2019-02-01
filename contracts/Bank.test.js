@@ -116,7 +116,7 @@ describe('Bank', () => {
       )
     }))
 
-    it.only('should create an activated account for sender', contract('Bank', async ({ web3, accounts, instance }) => {
+    it('should create an activated account for sender', contract('Bank', async ({ web3, accounts, instance }) => {
       // given
       // ... no active account exists for address 0
       // when
@@ -132,9 +132,16 @@ describe('Bank', () => {
         false,
       )
 
+      // then
+      // ... should eventually successfully mine the transaction
       const tx = await pollForValue(() => web3.eth.getTransactionReceipt(txHash))
-
       assert.match(tx.transactionHash, /0x[a-z0-9]{64}/)
+
+      // ... and should have emitted a AccountCreated event with expected values
+      const events = await instance.getPastEvents('AccountCreated', { fromBlock: 0, toBlock: 'latest' })
+      const AccountCreatedEvents = ContractUtils.events('AccountCreated', events)
+      assert.equal(AccountCreatedEvents.length, 1)
+      assert.equal(AccountCreatedEvents[0].accountAddress.toLowerCase(), accounts[0])
     }))
   })
 
